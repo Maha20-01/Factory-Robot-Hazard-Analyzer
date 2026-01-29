@@ -1,4 +1,4 @@
-// UC6: Business logic with custom exception handling
+// UC6 + UC7: Business logic with custom exception handling
 public class RobotHazardAuditor {
 
     public static double calculateHazardRisk(
@@ -30,18 +30,27 @@ public class RobotHazardAuditor {
             );
         }
 
-        // Determine machinery risk factor
+        // UC7: Machinery state risk mapping
         double machineryRiskFactor;
 
-        if (machineryState.equals("Worn")) {
-            machineryRiskFactor = 1.3;
-        } else if (machineryState.equals("Faulty")) {
-            machineryRiskFactor = 2.0;
-        } else {
-            machineryRiskFactor = 3.0;
+        switch (machineryState) {
+            case "Worn":
+                machineryRiskFactor = 1.3;
+                break;
+            case "Faulty":
+                machineryRiskFactor = 2.0;
+                break;
+            case "Critical":
+                machineryRiskFactor = 3.0;
+                break;
+            default:
+                // Safety net
+                throw new RobotSafetyException(
+                        "Error: Unsupported machinery state"
+                );
         }
 
-        // Hazard risk calculation
+        //  FINAL: Hazard risk calculation
         return ((1.0 - armPrecision) * 15.0)
                 + (workerDensity * machineryRiskFactor);
     }
