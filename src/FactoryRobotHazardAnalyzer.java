@@ -1,5 +1,3 @@
-// UC2: Accept Robot Hazard Inputs
-// This class collects input values from the user
 
 import java.util.Scanner;
 
@@ -10,27 +8,38 @@ public class FactoryRobotHazardAnalyzer {
         // UC1: Display system name
         System.out.println("Factory Robot Hazard Analyzer");
 
-        // Scanner object to read input from console
+        // Scanner object for input
         Scanner scanner = new Scanner(System.in);
 
-        // UC2: Accept Arm Precision input
+        // UC2: Accept inputs
         System.out.print("Enter Arm Precision: ");
         double armPrecision = scanner.nextDouble();
 
-        // UC2: Accept Worker Density input
         System.out.print("Enter Worker Density: ");
         int workerDensity = scanner.nextInt();
 
         scanner.nextLine(); // clear buffer
 
-        // UC2: Accept Machinery State input
         System.out.print("Enter Machinery State: ");
         String machineryState = scanner.nextLine();
 
-        // UC2: Echo the inputs back to the user
-        System.out.println("Arm Precision: " + armPrecision);
-        System.out.println("Worker Density: " + workerDensity);
-        System.out.println("Machinery State: " + machineryState);
+        // UC3: Simple machinery risk factor (assume valid)
+        double machineryRiskFactor = 1.0;
+
+        if (machineryState.equals("Worn")) {
+            machineryRiskFactor = 1.3;
+        } else if (machineryState.equals("Faulty")) {
+            machineryRiskFactor = 2.0;
+        } else if (machineryState.equals("Critical")) {
+            machineryRiskFactor = 3.0;
+        }
+
+        // UC3: Hazard Risk Calculation (no validation)
+        double hazardRiskScore =
+                ((1.0 - armPrecision) * 15.0) +
+                        (workerDensity * machineryRiskFactor);
+
+        System.out.println("Robot Hazard Risk Score: " + hazardRiskScore);
 
         scanner.close();
     }
