@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+// UC8: Clean entry point class
 public class FactoryRobotHazardAnalyzer {
 
     public static void main(String[] args) {
@@ -20,7 +21,6 @@ public class FactoryRobotHazardAnalyzer {
             System.out.print("Enter Machinery State (Worn/Faulty/Critical): ");
             String machineryState = scanner.nextLine();
 
-            // Call business logic method
             double riskScore = RobotHazardAuditor.calculateHazardRisk(
                     armPrecision,
                     workerDensity,
@@ -30,7 +30,7 @@ public class FactoryRobotHazardAnalyzer {
             System.out.println("Robot Hazard Risk Score: " + riskScore);
 
         } catch (RobotSafetyException e) {
-            // UC6: Exception handled here
+            // Exception message displayed here
             System.out.println(e.getMessage());
         }
 

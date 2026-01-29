@@ -1,7 +1,6 @@
-// UC6: Custom exception for robot safety violations
+// UC6: Custom exception class
 public class RobotSafetyException extends Exception {
 
-    // Constructor that accepts error message
     public RobotSafetyException(String message) {
         super(message);
     }
